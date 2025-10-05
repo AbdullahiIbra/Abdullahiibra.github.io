@@ -1,0 +1,299 @@
+/* Box sizing reset so padding/borders don't grow elements unexpectedly */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #202734;   /* page background (blue grayish) */
+  color: #e6e9ee;        /* default text color (light gray) */
+}
+
+/* Center common headings and paragraphs.
+   Main adds page padding. */
+h1, p { text-align: center; }
+main { padding: 20px 12px; }
+
+
+/*NAVBAR
+  Flexbox for a simple horizontal menu
+  Slightly darker strip to separate from page*/
+header {
+  background: #2f394b;                /* navbar background */
+  border-bottom: 1px solid #3a4354;   /* subtle divider line */
+}
+
+/* This targets either:
+  <header><nav><ul>…</ul></nav></header>*/
+header nav ul,
+body > ul:first-of-type {
+  list-style: none;
+  margin: 0;
+  padding: 14px 20px;
+  display: flex;          /* Flexbox row */
+  gap: 20px;              /* space between links */
+  justify-content: center;
+  flex-wrap: wrap;        /* wrap on small screens */
+  background: #2f394b;    /* keep same color under wrap */
+  border-bottom: 1px solid #3a4354;
+}
+
+/* Base link appearance in navbar */
+header nav a,
+body > ul:first-of-type a {
+  text-decoration: none;
+  color: #e6e9ee;         /* light text on dark nav */
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Hover/active states for navbar links */
+header nav a:hover,
+body > ul:first-of-type a:hover {
+  background: #3a4559;    /* slightly lighter on hover */
+}
+header nav a.active,
+body > ul:first-of-type a.active {
+  background: #44516a;    /* active tab look */
+}
+
+
+/* ABOUT PAGE
+  Centers the intro content*/
+.about {
+  max-width: 900px;        /* limit line length on big screens */
+  margin: 0 auto;
+  padding: 20px 12px;
+  text-align: center;
+}
+
+/* Circular profile photo with a subtle border ring */
+.center-image {
+  display: block;
+  margin: 20px auto 10px;
+  width: 200px;
+  height: 200px;
+  border-radius: 60%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border: 3px solid #3a4354;   /* subtle ring around photo */
+}
+
+
+/* SIMPLE INFO CARDS (About page)
+  1 column on mobile, grid on larger screens */
+.info-grid {
+  display: grid;          /* Grid layout for cards */
+  gap: 12px;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 12px;
+}
+
+/* Card surface (slightly lighter than page background) */
+.card {
+  background: #2a3242;           /* card background */
+  border: 1px solid #3a4354;     /* subtle card border */
+  border-radius: 8px;
+  padding: 12px;
+}
+.card h2 { margin-top: 0; }
+
+
+/*BUTTONS
+   - Flexbox container centers them
+   - Solid, muted accent color*/
+.button-container {
+  display: flex;                  /* horizontal layout for buttons */
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto 28px;
+  flex-wrap: wrap;                /* wrap on small screens */
+}
+
+/* Primary buttons */
+.btn-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  height: 42px;
+  background: #4f8fb3;           /* muted blue accent */
+  color: #f7fbff;                 /* high-contrast text */
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+.btn-box:hover { background: #3e748f; }  /* darker when hover */
+
+
+/*CV PAGE
+   Panels use same card style as About
+   Simple timeline, cer, and key-value rows */
+.panel.cv {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.cv-section {
+  background: #2a3242;         /* same card surface as About */
+  border: 1px solid #3a4354;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+/* Vertical list of items with spacing */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+/* Each timeline item gets a lighter background for contrast */
+.timeline li {
+  background: #323b50;         /* slightly lighter than section */
+  border: 1px solid #3a4354;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.bullets { margin: 8px 0 0; padding-left: 18px; }
+
+/* Inline badges for certifications */
+.cer {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* cer appearance */
+.cer li {
+  background: #39445c;         /* pill background */
+  border: 1px solid #48536b;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 14px;
+  color: #dfe6ee;
+}
+
+/* 2 column rows for "Languages" */
+.lg { list-style: none; margin: 0; padding: 0; }
+.lg li {
+  display: grid;
+  grid-template-columns: 1fr auto;  /* label on left, level on right */
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #3a4354;
+}
+.lg li:last-child { border-bottom: none; }
+
+
+/* RESPONSIVE CV LAYOUT
+   Turn the CV sections into columns on larger screens*/
+@media (min-width: 768px) {
+  .panel.cv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;   /* 2 columns on tablet */
+    gap: 12px;
+  }
+  .cv-section { margin: 0; }
+}
+@media (min-width: 1024px) {
+  .panel.cv { grid-template-columns: 1fr 1fr 1fr; }  /* 3 columns on desktop */
+}
+
+
+/* PORTFOLIO PAGE
+   - Grid of project cards*/
+.project-grid {
+  display: grid;
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+/* Project card surface matches other cards */
+.project-card {
+  background: #2a3242;
+  border: 1px solid #3a4354;
+  border-radius: 8px;
+  overflow: hidden;             /* keeps image corners rounded */
+}
+
+.project-card img { width: 100%; height: auto; display: block; }
+.project-card .content { padding: 12px; }
+
+/* Small inline tags for technologies used */
+.tech-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tech-list li {
+  font-size: 13px;
+  color: #d1d7e0;
+  border: 1px solid #48536b;
+  border-radius: 6px;
+  padding: 3px 6px;
+  background: #3a4559;
+}
+
+
+/*RESPONSIVE GRIDS for About and Portfolio pages
+    1 column on mobile
+    2 columns on tablets
+    3 columns on desktops*/
+@media (min-width: 768px) {
+  .info-grid { grid-template-columns: 1fr 1fr; }
+  .project-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) {
+  .info-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .project-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+
+/*FOOTER
+   Matches navbar tone for consistency*/
+  footer {
+  background: #2f394b;
+  border-top: 1px solid #3a4354;
+  color: #cfd6df;
+  text-align: center;
+  padding: 12px;
+  margin-top: 20px;
+}
+
+
+/*ABOUT PAGE TYPE SIZE OVERRIDES
+  Larger heading and intro paragraph */
+.about h1 {
+  font-size: 40px;     /* big headline */
+  margin-top: 20px;
+}
+
+.about p {
+  font-size: 30px;     /* larger intro paragraph */
+  line-height: 1.6;
+  max-width: 700px;    /* keep lines readable */
+  margin: 0 auto 20px;
+}
+
+/* Slightly larger copy in the three cards */
+.info-grid .card {
+  font-size: 18px;
+  line-height: 1.5;
+}
